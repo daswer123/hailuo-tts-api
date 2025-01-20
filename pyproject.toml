@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling","hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hailuo-tts-api"
+version = "0.0.1"
+authors = [
+  { name="daswer123", email="daswerq123@gmail.com" },
+]
+description = "A simple Wrapper for Hailuo TTS"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+  "requests",
+  "uuid",
+]
+
+[project.urls]
+Homepage = "https://github.com/daswer123/hailuo-tts-api"
+"Bug Tracker" = "https://github.com/daswer123/hailuo-tts-api/issues"
+
+[tool.hatch.build.targets.wheel]
+only-include=["hailuo_tts"]
