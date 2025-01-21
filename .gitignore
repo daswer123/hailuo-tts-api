@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 test.mp3
 env.py
+output.mp3
