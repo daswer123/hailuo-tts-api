@@ -54,7 +54,7 @@ def text_to_speech(text, model, voice, speed, volume, pitch, emotion, language,
         return None, f"Error: {str(e)}"
 
 def generate_random_voice_id():
-    return "random_" + ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+    return "random_" + ''.join(random.choices(string.ascii_letters + string.digits, k=12))
 
 def show_voice_id_input(use_custom_voice_id):
     return gr.update(visible=not use_custom_voice_id)
@@ -66,7 +66,8 @@ def clone_voice(audio_file, voice_id, noise_reduction, preview_text, accuracy, v
         # Upload file
         file_id = tts_instance.upload_voice_file(audio_file.name)
 
-        voice_id = voice_id if use_custom_voice_id else generate_random_voice_id()
+        voice_id = voice_id if not use_custom_voice_id else generate_random_voice_id()
+        print(voice_id)
         
         # Clone voice
         response, demo_path = tts_instance.clone_voice(
@@ -177,7 +178,7 @@ with gr.Blocks() as app:
                 with gr.Column():
                     # Cloning parameters
                     audio_file = gr.File(label="Audio File", file_types=["audio"])
-                    use_custom_voice_id = gr.Checkbox(label="Use Custom Voice ID",info="If you check this checkbox, you will be able to use a custom voice ID", value=False)
+                    use_custom_voice_id = gr.Checkbox(label="Random Voice ID",value=True,info="If you check this checkbox, you will be able to use a custom voice ID")
                     voice_id = gr.Textbox(label="Voice ID",visible=False, placeholder="Minimum 8 characters, letters and numbers,first letter must be a letter")
                     
                     with gr.Row():
